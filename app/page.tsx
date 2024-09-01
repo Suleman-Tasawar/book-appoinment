@@ -18,10 +18,10 @@ export default function Home() {
       ],
     },
     {
-      image: "/purepng.com-doctorsdoctorsdoctors-and-nursesa-qualified-practitioner-of-medicine-aclinicianmedical-practitionermale-doctor-1421526856786dbhlu.png",
-      title: "Dr. Ahmed Ali",
+      image: "/pexels-jeff-denlea-721292-3714743.jpg",
+      title: "Dr. Alina Ali",
       badge: "Orthopedic Surgeon",
-      text: "Dr. Ali specializes in orthopedic surgery and is known for his expertise in treating bone and joint conditions.",
+      text: "Dr. Alina specializes in orthopedic surgery and is known for his expertise in treating bone and joint conditions.",
       actionBadge: [
         {
           label: "Top Rated",
@@ -70,16 +70,16 @@ export default function Home() {
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <section className="hero bg-white/100 flex flex-col md:flex-col lg:flex-row ">
-          <div className="mockup-phone w-[300px] lg:w-[350px]">
+          <div className="mockup-phone hidden md:block lg:block lg:w-[350px]">
             <div className="camera"></div>
             <div className="display">
               <div className="artboard artboard-demo phone-1 p-0">
-                <div className="chat chat-start ml-[-60px]">
+                <div className="chat chat-start ml-[-110px]">
                   <div className="chat-bubble w-[200px]">
                     Heading over for my Appointment with docter 😃
                   </div>
                 </div>
-                <div className="chat chat-end mr-[-90px]">
+                <div className="chat chat-end mr-[-150px]">
                   <div className="chat-bubble">Take your time 
                   😉</div>
                 </div>
@@ -90,7 +90,7 @@ export default function Home() {
             <div className="max-w-md leading-10">
               <HeaderCard
                 title="Simplify Your Appointments"
-                titleClass="text-5xl"
+                titleClass="text-3xl lg:text-5xl"
                 text="Easily book, manage, and track appointments with our intuitive platform."
                 textClass="py-6"
               />
@@ -98,7 +98,7 @@ export default function Home() {
                 btnType=""
                 btnLink="./bookings"
                 btnText="Book Your First Appointment"
-                className="btn btn-accent rounded-[5px]"
+                className="btn btn-accent rounded-[5px] text-nowrap"
               />
             </div>
           </div>

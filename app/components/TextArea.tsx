@@ -27,7 +27,7 @@ const TextArea: React.FC<TextAreaProps> = ({
       <textarea
         id={name}
         name={name}
-        className={`${className} textarea-bordered`}
+        className={`${className} textarea-bordered outline-none`}
         placeholder={placeHolder}
         onChange={onChangeEvent}
       />

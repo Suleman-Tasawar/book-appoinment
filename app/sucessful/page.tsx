@@ -5,8 +5,7 @@ import HeaderCard from "../components/HeaderCard";
 const page = () => {
   return (
     <section className="flex h-screen items-center justify-center">
-      <div>
-        <div className="flex flex-col items-center space-y-2">
+        <div className="flex flex-col justify-center items-center text-center space-y-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-28 w-28 text-green-600"
@@ -48,7 +47,6 @@ const page = () => {
             <span className="text-sm font-medium"> Home </span>
           </Link>
         </div>
-      </div>
     </section>
   );
 };
