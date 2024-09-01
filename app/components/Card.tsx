@@ -16,14 +16,14 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ image, title, badge, text, actionBadge }) => {
   return (
-    <div className="card bg-base-100 w-96 h-[600px] shadow-xl">
-      <figure>
+    <div className="card bg-white w-52 lg:w-96 h-[600px] shadow-xl">
+      <figure className="w-full h-full">
         <Image 
           src={image} 
           alt={title} 
-          width={400} 
-          height={200} 
-          layout="responsive"
+          width={250} 
+          height={300}
+          style={{objectFit: "contain"}}
         />
       </figure>
       <div className="card-body">
