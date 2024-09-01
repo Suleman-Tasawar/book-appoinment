@@ -1,165 +1,126 @@
-import Image from "next/image";
-import Link from "next/link";
+import Head from "next/head";
+import HeaderCard from "./components/HeaderCard";
+import Button from "./components/Button";
+import Card from "./components/Card";
 
 export default function Home() {
+  const docterData = [
+    {
+      image: "/doctor-768x841.jpg",
+      title: "Dr. Ashir Khan",
+      badge: "Consultant Physician",
+      text: "Dr. Khan is a respected consultant physician with extensive experience in internal medicine and patient management.",
+      actionBadge: [
+        {
+          label: "Top Rated",
+          url: "",
+        },
+      ],
+    },
+    {
+      image: "/purepng.com-doctorsdoctorsdoctors-and-nursesa-qualified-practitioner-of-medicine-aclinicianmedical-practitionermale-doctor-1421526856786dbhlu.png",
+      title: "Dr. Ahmed Ali",
+      badge: "Orthopedic Surgeon",
+      text: "Dr. Ali specializes in orthopedic surgery and is known for his expertise in treating bone and joint conditions.",
+      actionBadge: [
+        {
+          label: "Top Rated",
+          url: "",
+        },
+      ],
+    },
+    {
+      image: "/true.jpeg",
+      title: "Dr. Bilal Javed",
+      badge: "Pediatrician",
+      text: "Dr. Javed is a dedicated pediatrician with a focus on child health and development, offering compassionate care to young patients.",
+      actionBadge: [
+        {
+          label: "Top Rated",
+          url: "",
+        },
+      ],
+    },
+  ];
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <section className="hero bg-white/100 flex flex-col md:flex-col lg:flex-row ">
-        <div className="mockup-phone">
-          <div className="camera"></div>
-          <div className="display">
-            <div className="artboard artboard-demo phone-1">
-              <div className="chat chat-start">
-                <div className="chat-bubble">
-                  It's over Anakin,
-                  <br />I have the high ground.
+    <>
+      <Head>
+        <title>Book Your Appointment - BookEase</title>
+        <meta
+          name="description"
+          content="Schedule your appointments easily with BookEase. Find and book appointments with our easy-to-use booking system."
+        />
+        <meta
+          name="keywords"
+          content="appointment booking, schedule appointment, online booking"
+        />
+        <meta
+          property="og:title"
+          content="Book Your Appointment - BookEase"
+        />
+        <meta
+          property="og:description"
+          content="Schedule your appointments easily with BookEase. Find and book appointments with our easy-to-use booking system."
+        />
+        <meta property="og:image" content="/next.svg" />
+        <meta property="og:url" content="https://appointmentbooker.com" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://appointmentbooker.com" />
+      </Head>
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <section className="hero bg-white/100 flex flex-col md:flex-col lg:flex-row ">
+          <div className="mockup-phone w-[300px] lg:w-[350px]">
+            <div className="camera"></div>
+            <div className="display">
+              <div className="artboard artboard-demo phone-1 p-0">
+                <div className="chat chat-start ml-[-60px]">
+                  <div className="chat-bubble w-[200px]">
+                    Heading over for my Appointment with docter 😃
+                  </div>
                 </div>
-              </div>
-              <div className="chat chat-end">
-                <div className="chat-bubble">You underestimate my power!</div>
+                <div className="chat chat-end mr-[-90px]">
+                  <div className="chat-bubble">Take your time 
+                  😉</div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="hero-content text-center">
-          <div className="max-w-md leading-10">
-            <h1 className="text-5xl font-bold">Simplify Your Appointments</h1>
-            <p className="py-6">
-              Easily book, manage, and track appointments with our intuitive
-              platform.
-            </p>
-            <button className="btn btn-neutral text-white rounded-[7px]">
-              <Link href="./bookings">Book Your First Appointment</Link>
-            </button>
+          <div className="hero-content text-center">
+            <div className="max-w-md leading-10">
+              <HeaderCard
+                title="Simplify Your Appointments"
+                titleClass="text-5xl"
+                text="Easily book, manage, and track appointments with our intuitive platform."
+                textClass="py-6"
+              />
+              <Button
+                btnType=""
+                btnLink="./bookings"
+                btnText="Book Your First Appointment"
+                className="btn btn-accent rounded-[5px]"
+              />
+            </div>
           </div>
-        </div>
-      </section>
-      <section className="stats shadow flex-col md:flex-col lg:flex-row my-20">
-        <div className="stat">
-          <div className="stat-figure text-secondary">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block h-8 w-8 stroke-current"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
+        </section>
+        <section className="mt-10">
+          <h1 className="text-center text-3xl font-bold">
+            Our Top Rated Docters
+          </h1>
+          <div className="mt-16 flex flex-col md:flex-col lg:flex-row lg:gap-x-10 justify-evenly items-center">
+            {docterData.map((data) => (
+              <Card
+                key={data.title}
+                title={data.title}
+                image={data.image}
+                badge={data.badge}
+                text={data.text}
+                actionBadge={data.actionBadge}
+              />
+            ))}
           </div>
-          <div className="stat-title">Total Bookings</div>
-          <div className="stat-value">31K</div>
-          <div className="stat-desc">Jan 1st - Feb 1st</div>
-        </div>
-
-        <div className="stat">
-          <div className="stat-figure text-secondary">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block h-8 w-8 stroke-current"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-              ></path>
-            </svg>
-          </div>
-          <div className="stat-title">Current Servings</div>
-          <div className="stat-value">4,200</div>
-          <div className="stat-desc">↗︎ 400 (22%)</div>
-        </div>
-
-        <div className="stat">
-          <div className="stat-figure text-secondary">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block h-8 w-8 stroke-current"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-              ></path>
-            </svg>
-          </div>
-          <div className="stat-title">5.0 Feedback</div>
-          <div className="stat-value">1,200</div>
-          <div className="stat-desc">↘︎ 90 (14%)</div>
-        </div>
-      </section>
-      <section className="">
-        <h1 className="text-center font-bold">Our Staff</h1>
-        <div className="carousel rounded-box w-96">
-          <div className="carousel-item w-1/2">
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp"
-              className="w-full"
-              
-            />
-            <h1>Docter </h1>
-            <p>Docter Infor</p>
-          </div>
-          <div className="carousel-item w-1/2">
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp"
-              className="w-full"
-            />
-            <h1>Docter </h1>
-            <p>Docter Infor</p>
-          </div>
-          <div className="carousel-item w-1/2">
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.webp"
-              className="w-full"
-            />
-            <h1>Docter </h1>
-            <p>Docter Infor</p>
-          </div>
-          <div className="carousel-item w-1/2">
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1494253109108-2e30c049369b.webp"
-              className="w-full"
-            />
-            <h1>Docter </h1>
-            <p>Docter Infor</p>
-          </div>
-          <div className="carousel-item w-1/2">
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.webp"
-              className="w-full"
-            />
-            <h1>Docter </h1>
-            <p>Docter Infor</p>
-          </div>
-          <div className="carousel-item w-1/2">
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1559181567-c3190ca9959b.webp"
-              className="w-full"
-            />
-            <h1>Docter </h1>
-            <p>Docter Infor</p>
-          </div>
-          <div className="carousel-item w-1/2">
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.webp"
-              className="w-full"
-            />
-            <h1>Docter </h1>
-            <p>Docter Infor</p>
-          </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </>
   );
 }

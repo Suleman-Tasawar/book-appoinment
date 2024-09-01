@@ -1,7 +1,9 @@
 "use client";
+import Head from "next/head";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import dayjs from "dayjs";
+import HeaderCard from "../components/HeaderCard";
 import TextInput from "../components/TextInput";
 import SelectInput from "../components/SelectInput";
 import DatePickerComponent from "../components/DatePicker";
@@ -11,16 +13,6 @@ import TextArea from "../components/TextArea";
 const Page: React.FC = () => {
   const router = useRouter();
 
-  interface Gender {
-    id: string;
-    value: string;
-  }
-
-  const genderOptions: Gender[] = [
-    { id: "1", value: "Male" },
-    { id: "2", value: "Female" },
-    { id: "3", value: "Prefer not to say" },
-  ];
   type BookData = {
     name: string;
     phone: string;
@@ -32,8 +24,8 @@ const Page: React.FC = () => {
     appointmentDate: string;
     appointmentTime: string;
     whereAbout: string;
-  }
-  
+  };
+
   const [formData, setFormData] = useState<BookData>({
     name: "",
     phone: "",
@@ -46,6 +38,10 @@ const Page: React.FC = () => {
     appointmentTime: "",
     whereAbout: "",
   });
+
+  const [submit, setSubmit] = useState("Book Now");
+
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -66,9 +62,35 @@ const Page: React.FC = () => {
     setFormData((prevData) => ({ ...prevData, appointmentTime: time || "" }));
   };
 
+  const validateForm = (): boolean => {
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.name) newErrors.name = "Full name is required";
+    if (!formData.phone) newErrors.phone = "Contact number is required";
+    if (!formData.email) newErrors.email = "Email address is required";
+    else if (!/\S+@\S+\.\S+/.test(formData.email))
+      newErrors.email = "Invalid email address";
+    if (!formData.dob) newErrors.dob = "Date of birth is required";
+    if (!formData.gender) newErrors.gender = "Gender is required";
+    if (!formData.reasons)
+      newErrors.reasons = "Reason for appointment is required";
+    if (!formData.appointmentDate)
+      newErrors.appointmentDate = "Preferred appointment date is required";
+    if (!formData.appointmentTime)
+      newErrors.appointmentTime = "Preferred appointment time is required";
+    if (!formData.whereAbout)
+      newErrors.whereAbout = "Please specify how you heard about us";
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!validateForm()) return;
+    setSubmit("Booking");
     try {
       const response = await fetch("/api/book", {
         method: "POST",
@@ -77,7 +99,7 @@ const Page: React.FC = () => {
         },
         body: JSON.stringify(formData),
       });
-
+      setSubmit("Book Now");
       if (response.ok) {
         router.push("/sucessful");
       } else {
@@ -89,120 +111,168 @@ const Page: React.FC = () => {
   };
 
   return (
-    <main className="p-4 flex flex-col justify-center items-center">
-      <div className="text-center">
-        <h1 className="text-2xl font-bold mb-4">Doctor's Appointment Form</h1>
-        <p>
-          Please fill out this form to be successfully able to book an
-          appointment
-        </p>
-      </div>
-      <div>
-        <form className="flex flex-col justify-center items-center" onSubmit={handleSubmit}>
-          <div className="mt-[20px] grid grid-cols-1 gap-[16px] md:grid-cols-2 lg:grid-cols-3 justify-center items-center place-content-center">
-            <TextInput
-              inputName="name"
-              prefix="Full Name"
-              prefixClass="block text-sm font-medium text-gray-700"
-              type="text"
-              className="mb-4"
-              onChange={handleChange}
-            />
+    <>
+      <Head>
+        <title>Book an Appointment - BookEase</title>
+        <meta
+          name="description"
+          content="Book your appointment online with BookEase. Use our easy-to-use form to schedule your next appointment."
+        />
+        <meta
+          name="keywords"
+          content="book appointment, schedule appointment, online booking form"
+        />
+        <meta property="og:title" content="Book an Appointment - BookEase" />
+        <meta
+          property="og:description"
+          content="Book your appointment online with BookEase. Use our easy-to-use form to schedule your next appointment."
+        />
+        <meta property="og:image" content="/next.svg" />
+        <meta property="og:url" content="https://www.bookease.com/bookings" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://www.bookease.com/bookings" />
+      </Head>
 
-            <DatePickerComponent
-              label="Date of Birth"
-              onChange={(date) =>
-                handleDateChange("dob", date ? date.format("YYYY-MM-DD") : "")
-              }
-            />
+      <main className="p-4 flex flex-col justify-center items-center">
+        <div className="text-center">
+          <HeaderCard
+            title="Doctor's Appointment Form"
+            titleClass="text-2xl"
+            text="  Please fill out this form to be successfully able to book an appointment"
+            textClass=""
+          />
+        </div>
+        <div className=" mt-5 bg-white/80 backdrop-blur-md text-gray-900 p-5 rounded-lg">
+          <form
+            className="flex flex-col justify-center items-center"
+            onSubmit={handleSubmit}
+          >
+            <div className="mt-[20px] grid grid-cols-1 gap-[16px] md:grid-cols-2 lg:grid-cols-3 justify-center items-center place-content-center">
+              <TextInput
+                inputName="name"
+                prefix="Full Name"
+                prefixClass="block text-sm font-medium text-gray-700"
+                type="text"
+                className="mb-4 text-gray-800"
+                onChange={handleChange}
+                errorMsg={errors.name}
+                placeHolder="Your Full Name"
+              />
 
-            <SelectInput
-              label="Gender"
-              options={genderOptions.map((g) => ({
-                value: g.value,
-                label: g.value,
-              }))}
-              selectedValue={formData.gender}
-              onChange={(e) => handleSelectChange("gender", e.target.value)}
-            />
+              <DatePickerComponent
+                label="Date of Birth"
+                onChange={(date) =>
+                  handleDateChange("dob", date ? date.format("YYYY-MM-DD") : "")
+                }
+                pastDisable={false}
+                errorMsg={errors.dob}
+              />
 
-            <TextInput
-              inputName="phone"
-              prefix="Contact Number"
-              prefixClass="block text-sm font-medium text-gray-700"
-              type="tel"
-              className="mb-4"
-              onChange={handleChange}
-            />
+              <SelectInput
+                label="Gender"
+                options={[
+                  { value: "1", label: "Male" },
+                  { value: "2", label: "Female" },
+                  { value: "3", label: "Prefer not to say" },
+                ]}
+                selectedValue={formData.gender}
+                onChange={(e) => handleSelectChange("gender", e.target.value)}
+                errorMsg={errors.gender}
+              />
 
-            <TextInput
-              inputName="email"
-              prefix="Email Address"
-              prefixClass="block text-sm font-medium text-gray-700"
-              type="email"
-              className="mb-4"
-              onChange={handleChange}
-            />
+              <TextInput
+                inputName="phone"
+                prefix="Contact Number"
+                prefixClass="block text-sm font-medium text-gray-700"
+                type="tel"
+                className="mb-4 text-gray-800"
+                onChange={handleChange}
+                errorMsg={errors.phone}
+                placeHolder="Your Mobile Number"
+              />
 
-            <DatePickerComponent
-              label="Preferred Appointment Date"
-              onChange={(date) =>
-                handleDateChange(
-                  "appointmentDate",
-                  date ? date.format("YYYY-MM-DD") : ""
-                )
-              }
-            />
+              <TextInput
+                inputName="email"
+                prefix="Email Address"
+                prefixClass="block text-sm font-medium text-gray-700"
+                type="email"
+                className="mb-4 text-gray-800"
+                onChange={handleChange}
+                errorMsg={errors.email}
+                placeHolder="Your Email Address"
+              />
 
-            <TimePickerComponent
-              label="Preferred Appointment Time"
-              time={
-                formData.appointmentTime
-                  ? dayjs(formData.appointmentTime)
-                  : null
-              }
-              setTime={(time) =>
-                handleTimeChange(time ? time.format("HH:mm") : "")
-              }
-            />
+              <DatePickerComponent
+                label="Preferred Appointment Date"
+                onChange={(date) =>
+                  handleDateChange(
+                    "appointmentDate",
+                    date ? date.format("YYYY-MM-DD") : ""
+                  )
+                }
+                pastDisable={true}
+                errorMsg={errors.appointmentDate}
+              />
 
-            <TextArea
-              label="Reason for Appointment"
-              labelClass="block text-sm font-medium text-gray-700"
-              name="reasons"
-              className="mt-1 block w-full h-24 p-2 border rounded-md shadow-sm"
-              placeHolder="Describe your reason for the appointment here"
-              onChangeEvent={handleChange}
-            />
+              <TimePickerComponent
+                label="Preferred Appointment Time"
+                time={
+                  formData.appointmentTime
+                    ? dayjs(formData.appointmentTime)
+                    : null
+                }
+                setTime={(time) =>
+                  handleTimeChange(time ? time.format("HH:mm") : "")
+                }
+                errorMsg={errors.appointmentTime}
+              />
 
-            <TextArea
-              label="Known Allergies"
-              labelClass="block text-sm font-medium text-gray-700"
-              name="allergies"
-              className="mt-1 block w-full h-24 p-2 border rounded-md shadow-sm"
-              placeHolder="List any known allergies here"
-              onChangeEvent={handleChange}
-            />
+              <TextArea
+                label="Reason for Appointment"
+                labelClass="block text-sm font-medium text-gray-700"
+                name="reasons"
+                className="mt-1 text-gray-800 block w-full h-24 p-2 border rounded-md shadow-sm"
+                placeHolder="Describe your reason for the appointment here"
+                onChangeEvent={handleChange}
+                errorMsg={errors.reasons}
+              />
 
-            <SelectInput
-              label="How Did You Hear About Us?"
-              options={[
-                { value: "Referral", label: "Referral" },
-                { value: "Online Search", label: "Online Search" },
-                { value: "Social Media", label: "Social Media" },
-                { value: "Other", label: "Other" },
-              ]}
-              selectedValue={formData.whereAbout}
-              onChange={(e) => handleSelectChange("whereAbout", e.target.value)}
-            />
-          </div>
+              <TextArea
+                label="Known Allergies"
+                labelClass="block text-sm font-medium text-gray-700"
+                name="allergies"
+                className="mt-1 text-gray-800 block w-full h-24 p-2 border rounded-md shadow-sm"
+                placeHolder="List any known allergies here"
+                onChangeEvent={handleChange}
+              />
 
-          <button type="submit" className="btn btn-accent rounded-[5px]">
-            Book Now
-          </button>
-        </form>
-      </div>
-    </main>
+              <SelectInput
+                label="How Did You Hear About Us?"
+                options={[
+                  { value: "Referral", label: "Referral" },
+                  { value: "Online Search", label: "Online Search" },
+                  { value: "Social Media", label: "Social Media" },
+                  { value: "Other", label: "Other" },
+                ]}
+                selectedValue={formData.whereAbout}
+                onChange={(e) =>
+                  handleSelectChange("whereAbout", e.target.value)
+                }
+                errorMsg={errors.whereAbout}
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={submit === "Booking"}
+              className="btn bg-blue-800 text-white hover:bg-blue-400 rounded-[5px]"
+            >
+              {submit}
+            </button>
+          </form>
+        </div>
+      </main>
+    </>
   );
 };
 

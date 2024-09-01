@@ -7,6 +7,7 @@ interface TextAreaProps {
   className: string;
   placeHolder: string;
   onChangeEvent: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  errorMsg?:string
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
@@ -15,7 +16,8 @@ const TextArea: React.FC<TextAreaProps> = ({
   name,
   className,
   placeHolder,
-  onChangeEvent
+  onChangeEvent,
+  errorMsg
 }) => {
   return (
     <div>
@@ -29,6 +31,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         placeholder={placeHolder}
         onChange={onChangeEvent}
       />
+      {errorMsg && <div className="text-red-500">{errorMsg}</div>}
     </div>
   );
 };

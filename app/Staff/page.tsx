@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-
+import HeaderCard from "../components/HeaderCard";
 const Page = () => {
   type BookData = {
     name: string;
@@ -53,13 +53,17 @@ const Page = () => {
 
   return (
     <section className="min-h-screen">
-      <div className="mt-5">
-        <h1 className="text-3xl text-center">Booking Data for Patients</h1>
-        {
-          bookingData.length >0?(
-            <div className="m-5 p-5">
+      <div className="mt-5 text-center">
+        <HeaderCard
+          title="Booking data for patients"
+          titleClass="text-3xl"
+          text="You can easily approve or remove the bookings here"
+          textClass="py-6"
+        />
+        {bookingData.length > 0 ? (
+          <div className="m-5 p-5">
             <table className="table">
-              <thead>
+              <thead className="bg-blue-900 text-white">
                 <tr>
                   {tableHeadings.map((heading) => (
                     <th key={heading.id}>{heading.headName}</th>
@@ -84,10 +88,9 @@ const Page = () => {
               </tbody>
             </table>
           </div>
-          ):
-          (<h1 className="text-3xl text-center">No Bookings Yest :)</h1>)
-        }
-
+        ) : (
+          <h1 className="text-xl text-center mt-10">No Bookings Yet</h1>
+        )}
       </div>
     </section>
   );

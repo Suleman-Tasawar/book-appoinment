@@ -5,23 +5,25 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import TextField from '@mui/material/TextField';
 
-// Define the props for the TimePickerComponent
 interface TimePickerComponentProps {
   label: string;
-  time: Dayjs | null; // Use Dayjs or null for the time value
-  setTime: (time: Dayjs | null) => void; // Callback to handle time changes
+  time: Dayjs | null;
+  setTime: (time: Dayjs | null) => void;
+  errorMsg:string
 }
 
-const TimePickerComponent: React.FC<TimePickerComponentProps> = ({ label, time, setTime }) => {
+const TimePickerComponent: React.FC<TimePickerComponentProps> = ({ label, time, setTime,errorMsg }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">{label}</label>
         <TimePicker
+        className='bg-white'
           value={time}
           onChange={(newTime) => setTime(newTime)}
           components={{ TextField: TextField }}
         />
+      {errorMsg && <div className="text-red-500">{errorMsg}</div>}
       </div>
     </LocalizationProvider>
   );

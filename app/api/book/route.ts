@@ -1,5 +1,3 @@
-import { NextRequest, NextResponse } from 'next/server';
-
 type BookData = {
   name: string;
   phone: string;
@@ -13,36 +11,19 @@ type BookData = {
   whereAbout: string;
 }
 
-let bookAppointmentData: BookData[] = [
-  {
-    "name": "Jane Doe",
-    "email": "janedoe@example.com",
-    "phone": "+1234567890",
-    "dob": "1990-05-15",
-    "gender": "Female",
-    "reasons": "Routine check-up",
-    "allergies": "None",
-    "appointmentDate": "2024-09-01",
-    "appointmentTime": "14:00",
-    "whereAbout": "Online"
-  }
-  
-];
-export async function POST(request: NextRequest) {
-  try {
-    const data: BookData = await request.json();
-    bookAppointmentData.push(data);
-
-    return NextResponse.json({
-      message: 'Appointment added successfully',
-      data: bookAppointmentData,
-    });
-  } catch (error) {
-    return NextResponse.json({ error: 'Failed to add appointment' }, { status: 500 });
-  }
+let bookAppointmentData: BookData[] = [];
+export async function POST(request:Request) {
+  const bookingData =  await request.json();
+  bookAppointmentData.push(bookingData)
+  return new Response(JSON.stringify(bookingData),{
+    headers:{
+      "Content-Type":"application/json",
+    },
+    status:201,
+  })
 }
 
 
 export async function GET() {
-  return NextResponse.json(bookAppointmentData);
+  return Response.json(bookAppointmentData);
 }
