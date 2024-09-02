@@ -16,7 +16,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ image, title, badge, text, actionBadge }) => {
   return (
-    <div className="card bg-white w-52 lg:w-96 h-[600px] shadow-xl">
+    <div className="card bg-white w-72 lg:w-96 h-[600px] shadow-xl">
       <figure className="w-full h-full">
         <Image 
           src={image} 
@@ -27,10 +27,10 @@ const Card: React.FC<CardProps> = ({ image, title, badge, text, actionBadge }) =
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">
-          {title}
-          <div className="badge badge-secondary text-white">{badge}</div>
-        </h2>
+        <div className="flex flex-col md:flex-col justify-between items-center lg:flex-row">    
+          <h1 className="card-title">{title}</h1>
+          <div className="badge badge-secondary text-white h-10 text-nowrap">{badge}</div>
+        </div>
         <p>{text}</p>
         <div className="card-actions justify-end">
           {actionBadge.map((action) => (

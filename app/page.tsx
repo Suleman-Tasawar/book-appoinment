@@ -107,7 +107,7 @@ export default function Home() {
           <h1 className="text-center text-3xl font-bold">
             Our Top Rated Docters
           </h1>
-          <div className="mt-16 flex flex-col md:flex-col lg:flex-row lg:gap-x-10 justify-evenly items-center">
+          <div className="mt-16 flex flex-col md:flex-col lg:flex-row gap-y-10 md:gap-y-10 lg:gap-y-0 lg:gap-x-10 justify-evenly items-center">
             {docterData.map((data) => (
               <Card
                 key={data.title}

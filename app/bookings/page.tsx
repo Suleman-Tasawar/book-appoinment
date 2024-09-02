@@ -265,7 +265,7 @@ const Page: React.FC = () => {
             <button
               type="submit"
               disabled={submit === "Booking"}
-              className="btn bg-blue-800 text-white hover:bg-blue-400 rounded-[5px]"
+              className="btn bg-blue-800 text-white mt-5 hover:bg-blue-400 rounded-[5px]"
             >
               {submit}
             </button>
