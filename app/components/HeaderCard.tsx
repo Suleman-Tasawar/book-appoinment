@@ -1,13 +1,7 @@
 import React from 'react'
+import { HeaderCardProps } from '../utils/interface'
 
-type HeaderCard = {
-    title:string,
-    titleClass:string,
-    text:string
-    textClass:string
-}
-
-const HeaderCard:React.FC<HeaderCard> = ({title,titleClass,text,textClass}) => {
+const HeaderCard:React.FC<HeaderCardProps> = ({title,titleClass,text,textClass}) => {
   return (
     <>
         <h1 className={`${titleClass} font-bold mb-4`}>{title}</h1>

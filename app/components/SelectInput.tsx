@@ -1,17 +1,5 @@
 import React from "react";
-
-interface Option {
-  value: string;
-  label: string;
-}
-
-interface SelectInputProps {
-  label: string;
-  options: Option[];
-  selectedValue: string;
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  errorMsg:string
-}
+import { SelectInputProps } from "../utils/interface";
 
 const SelectInput: React.FC<SelectInputProps> = ({ label, options, selectedValue, onChange,errorMsg }) => {
   return (

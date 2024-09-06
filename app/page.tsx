@@ -2,47 +2,10 @@ import Head from "next/head";
 import HeaderCard from "./components/HeaderCard";
 import Button from "./components/Button";
 import Card from "./components/Card";
+import Carousal from "./components/Carousal";
+import { docterData } from "./utils/data";
 
 export default function Home() {
-  const docterData = [
-    {
-      image: "/doctor-768x841.jpg",
-      title: "Dr. Ashir Khan",
-      badge: "Consultant Physician",
-      text: "Dr. Khan is a respected consultant physician with extensive experience in internal medicine and patient management.",
-      actionBadge: [
-        {
-          label: "Top Rated",
-          url: "",
-        },
-      ],
-    },
-    {
-      image: "/pexels-jeff-denlea-721292-3714743.jpg",
-      title: "Dr. Alina Ali",
-      badge: "Orthopedic Surgeon",
-      text: "Dr. Alina specializes in orthopedic surgery and is known for his expertise in treating bone and joint conditions.",
-      actionBadge: [
-        {
-          label: "Top Rated",
-          url: "",
-        },
-      ],
-    },
-    {
-      image: "/true.jpeg",
-      title: "Dr. Bilal Javed",
-      badge: "Pediatrician",
-      text: "Dr. Javed is a dedicated pediatrician with a focus on child health and development, offering compassionate care to young patients.",
-      actionBadge: [
-        {
-          label: "Top Rated",
-          url: "",
-        },
-      ],
-    },
-  ];
-
   return (
     <>
       <Head>
@@ -55,10 +18,7 @@ export default function Home() {
           name="keywords"
           content="appointment booking, schedule appointment, online booking"
         />
-        <meta
-          property="og:title"
-          content="Book Your Appointment - BookEase"
-        />
+        <meta property="og:title" content="Book Your Appointment - BookEase" />
         <meta
           property="og:description"
           content="Schedule your appointments easily with BookEase. Find and book appointments with our easy-to-use booking system."
@@ -80,8 +40,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="chat chat-end mr-[-150px]">
-                  <div className="chat-bubble">Take your time 
-                  😉</div>
+                  <div className="chat-bubble">Take your time 😉</div>
                 </div>
               </div>
             </div>
@@ -103,7 +62,14 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="mt-10">
+        <section className="flex flex-col justify-center items-center mt-10">
+          <div className="text-center">
+            <h1 className="text-3xl font-bold">Our Services</h1>
+            <p className="mt-2">We offer the follwing services feel free to contact us related these services</p>
+          </div>
+          <Carousal />
+        </section>
+        <section className="mt-10 ">
           <h1 className="text-center text-3xl font-bold">
             Our Top Rated Docters
           </h1>

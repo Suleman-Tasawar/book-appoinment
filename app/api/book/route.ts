@@ -1,15 +1,4 @@
-type BookData = {
-  name: string;
-  phone: string;
-  email: string;
-  dob: string;
-  gender: string;
-  reasons: string;
-  allergies: string;
-  appointmentDate: string;
-  appointmentTime: string;
-  whereAbout: string;
-}
+import { BookData } from "@/app/utils/defination";
 
 let bookAppointmentData: BookData[] = [];
 export async function POST(request:Request) {

@@ -1,35 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import HeaderCard from "../components/HeaderCard";
+import { BookData } from "../utils/defination";
+import { tableHeadings } from "../utils/data";
 const Page = () => {
-  type BookData = {
-    name: string;
-    email: string;
-    phone: string;
-    dob: string;
-    gender: string;
-    reasons: string;
-    allergies: string;
-    appointmentData: string;
-    appointmentTime: string;
-    whereAbout: string;
-  };
-
-  const tableHeadings = [
-    { id: 1, headName: "Name" },
-    { id: 2, headName: "Email" },
-    { id: 3, headName: "Phone" },
-    { id: 4, headName: "DOB" },
-    { id: 5, headName: "Gender" },
-    { id: 6, headName: "Reasons" },
-    { id: 7, headName: "Allergies" },
-    { id: 8, headName: "Appointment Date" },
-    { id: 9, headName: "Appointment Time" },
-    { id: 10, headName: "Know About Us" },
-  ];
 
   const [bookingData, setBookingData] = useState<BookData[]>([]);
-
+  //Fetching the appointment data as json from our api route.
+  //Since it isnt linked with a DB yet so the data will be lost after page refresh
   const fetchBookingData = async () => {
     try {
       const response = await fetch("/api/book", {
@@ -48,8 +26,6 @@ const Page = () => {
   useEffect(() => {
     fetchBookingData();
   }, []);
-
-  console.log(bookingData);
 
   return (
     <section className="min-h-screen">
@@ -71,6 +47,7 @@ const Page = () => {
                 </tr>
               </thead>
               <tbody>
+                {/*Removing repitative task with mapping from an array*/}
                 {bookingData.map((data) => (
                   <tr key={data.phone}>
                     <td>{data.name}</td>
@@ -80,7 +57,7 @@ const Page = () => {
                     <td>{data.gender}</td>
                     <td>{data.reasons}</td>
                     <td>{data.allergies}</td>
-                    <td>{data.appointmentData}</td>
+                    <td>{data.appointmentDate}</td>
                     <td>{data.appointmentTime}</td>
                     <td>{data.whereAbout}</td>
                   </tr>
