@@ -19,26 +19,8 @@ const Login = () => {
     }));
   };
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const email = loginData.email;
-    const password = loginData.password;
-
-    const response = await fetch("/api/auth", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (response.ok) {
-      router.push("/staff");
-    } else {
-      setError("Invalid Credidentials");
-    }
-  }
   return (
-    <form className="mt-5" onSubmit={handleSubmit}>
+    <form className="mt-5">
       <TextInput
         inputName="email"
         prefix="Email"
