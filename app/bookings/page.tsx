@@ -2,6 +2,7 @@
 import Head from "next/head";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { BookData } from "../utils/defination";
 import dayjs from "dayjs";
 import HeaderCard from "../components/HeaderCard";
 import TextInput from "../components/TextInput";
@@ -10,21 +11,8 @@ import DatePickerComponent from "../components/DatePicker";
 import TimePickerComponent from "../components/TimePicker";
 import TextArea from "../components/TextArea";
 
-const Page: React.FC = () => {
+const Page = () => {
   const router = useRouter();
-
-  type BookData = {
-    name: string;
-    phone: string;
-    email: string;
-    dob: string;
-    gender: string;
-    reasons: string;
-    allergies: string;
-    appointmentDate: string;
-    appointmentTime: string;
-    whereAbout: string;
-  };
 
   const [formData, setFormData] = useState<BookData>({
     name: "",
@@ -265,7 +253,7 @@ const Page: React.FC = () => {
             <button
               type="submit"
               disabled={submit === "Booking"}
-              className="btn bg-blue-800 text-white hover:bg-blue-400 rounded-[5px]"
+              className="btn bg-blue-800 text-white mt-5 hover:bg-blue-400 rounded-[5px]"
             >
               {submit}
             </button>

@@ -1,14 +1,5 @@
 import React from 'react';
-
-interface TextAreaProps {
-  label: string;
-  labelClass: string;
-  name: string;
-  className: string;
-  placeHolder: string;
-  onChangeEvent: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  errorMsg?:string
-}
+import { TextAreaProps } from '../utils/interface';
 
 const TextArea: React.FC<TextAreaProps> = ({
   label,

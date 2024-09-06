@@ -3,15 +3,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { Dayjs } from "dayjs";
-
-// Define props for the DatePicker component
-interface DatePickerProps {
-  label: string;
-  onChange: (date: Dayjs | null) => void;
-  errorMsg: string | null;
-  pastDisable: boolean;
-}
+import { DatePickerProps } from "../utils/interface";
 
 const DatePickerComponent: React.FC<DatePickerProps> = ({
   label,

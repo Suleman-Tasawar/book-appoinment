@@ -2,14 +2,7 @@ import * as React from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
-import { Dayjs } from "dayjs";
-
-interface TimePickerComponentProps {
-  label: string;
-  time: Dayjs | null;
-  setTime: (time: Dayjs | null) => void;
-  errorMsg: string;
-}
+import { TimePickerComponentProps } from "../utils/interface";
 
 const TimePickerComponent: React.FC<TimePickerComponentProps> = ({
   label,

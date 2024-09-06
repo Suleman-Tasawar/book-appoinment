@@ -1,15 +1,5 @@
-import React, { ChangeEvent } from "react";
-
-interface TextInputProps {
-  inputName: string;
-  prefix: string;
-  prefixClass: string;
-  type: string;
-  className?: string;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  errorMsg:string
-  placeHolder:string
-}
+import React from "react";
+import { TextInputProps } from "../utils/interface";
 
 const TextInput: React.FC<TextInputProps> = ({
   inputName,
@@ -28,7 +18,7 @@ const TextInput: React.FC<TextInputProps> = ({
       </label>
       <input
         name={inputName}
-        id="textInput"
+        id={inputName}
         type={type}
         placeholder={placeHolder}
         className={`input rounded-[5px] bg-white outline-none input-bordered w-full max-w-xs ${className}`}
