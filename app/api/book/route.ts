@@ -1,18 +1,6 @@
-import { BookData } from "@/app/utils/defination";
+import { NextRequest, NextResponse } from "next/server";
 
-let bookAppointmentData: BookData[] = [];
-export async function POST(request:Request) {
-  const bookingData =  await request.json();
-  bookAppointmentData.push(bookingData)
-  return new Response(JSON.stringify(bookingData),{
-    headers:{
-      "Content-Type":"application/json",
-    },
-    status:201,
-  })
-}
-
-
-export async function GET() {
-  return Response.json(bookAppointmentData);
+export async function POST(request: NextRequest) {
+    const body = await request.json();
+    return NextResponse.json(body,{status:201})
 }
