@@ -7,5 +7,6 @@ export const CreateBookingSchema = z.object({
   email: z.string().optional(),
   phone: z.string().min(10, "Enter your phone number"),
   reason: z.string().min(12, "Enter a reason for checkup"),
-  date: z.iso.date()
+  date: z.date(),
 });
+export type BookingForm = z.infer<typeof CreateBookingSchema>;
